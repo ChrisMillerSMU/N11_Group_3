@@ -69,7 +69,7 @@ module.exports = function routes(app, logger) {
   });
 
   // GET /checkdb
-  app.get('/values', (req, res) => {
+  app.get('/values/:table', (req, res) => {
     // obtain a connection from our pool of connections
     pool.getConnection(function (err, connection){
       if(err){
@@ -78,7 +78,7 @@ module.exports = function routes(app, logger) {
         res.status(400).send('Problem obtaining MySQL connection'); 
       } else {
         // if there is no issue obtaining a connection, execute query and release connection
-        connection.query('SELECT value FROM `db`.`test_table`', function (err, rows, fields) {
+        connection.query('SELECT value FROM `tv_advertisement`.' + req.params, function (err, rows, fields) {
           connection.release();
           if (err) {
             logger.error("Error while fetching values: \n", err);
