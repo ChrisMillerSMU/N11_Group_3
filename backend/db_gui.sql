@@ -11,13 +11,15 @@ CREATE TABLE athlete(
     year INT, stat VARCHAR (255),
     twitter VARCHAR (255), instagram VARCHAR (255),
     email VARCHAR (255), password VARCHAR (255),
-    PRIMARY KEY (school_name, jersey_number)
+    PRIMARY KEY (email)
 );
 
 CREATE TABLE company(
-    company_id INT NOT NULL, name VARCHAR(255), email VARCHAR (255),
+    company_id INT NOT NULL,
+    name VARCHAR(255), 
+    email VARCHAR (255),
     password VARCHAR (255),
-    PRIMARY KEY (company_id)
+    PRIMARY KEY (email)
 );
 
 CREATE TABLE submission( 
