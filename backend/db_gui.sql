@@ -2,6 +2,7 @@
 
 CREATE DATABASE tv_advertisement;
 
+USE tv_advertisement;
 
 CREATE TABLE athlete(
     school_name VARCHAR(255) DEFAULT 'School Name',
@@ -15,9 +16,9 @@ CREATE TABLE athlete(
 );
 
 CREATE TABLE company(
-    company_id INT NOT NULL, name VARCHAR(255), email VARCHAR (255),
+    name VARCHAR(255), email VARCHAR (255),
     password VARCHAR (255),
-    PRIMARY KEY (company_id)
+    PRIMARY KEY (email)
 );
 
 CREATE TABLE submission( 
@@ -25,7 +26,7 @@ CREATE TABLE submission(
     company_id INT NOT NULL, athlete_id VARCHAR(255),
     is_accepted BOOLEAN, is_interested BOOLEAN,
     date_time DATETIME,
-    PRIMARY KEY (application_id), 
+    PRIMARY KEY (application_id),
     FOREIGN KEY (athlete_id) REFERENCES athlete(school_name,jersey_number),
     FOREIGN KEY (company_id) REFERENCES company (company_id)
 );
