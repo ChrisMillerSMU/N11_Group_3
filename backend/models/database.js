@@ -14,9 +14,8 @@ const connect = async () => {
         
         await util.promisify(connection.connect).bind(connection);
 
-        const DBQuery = () => {
-            util.promisify(connection.query).bind(connection);
-        }
+        const DBQuery = util.promisify(connection.query).bind(connection);
+        console.log(DBQuery.prototype)
         const disconnect = () => connection.end();
         return { DBQuery, disconnect };
 

@@ -15,6 +15,7 @@ router.post('/athlete/', async(req, res, next) => {
 router.get('/', async(req, res, next) => {
     try {
         const result = await req.models.athlete.getAthletes();
+        console.log(result)
         res.status(200).json(result);
     }
     catch (err) {

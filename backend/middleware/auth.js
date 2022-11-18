@@ -3,7 +3,6 @@ const User = require('../models/user');
 const connectToDatabase = require('../models/database-helpers.js');
 const Athlete = require('../models/athlete');
 
-
 const accessTokenSecret = 'goldeneasteregg';
 
 const authenticate = async (username, password, isAthlete) => {

@@ -21,7 +21,8 @@ class Athlete {
     };
 
     async getAthletes() {
-        const result = await this.DBQuery("SELECT * FROM athlete");
+        console.log(this.DBQuery)
+        const result = await this.DBQuery("SELECT * FROM athlete;");
         console.log("athlete.js test", result);
         return result;
     }
