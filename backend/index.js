@@ -8,7 +8,7 @@ app.use(middleware.request);
 
 app.use('/athlete', require('./routes/athlete'));
 app.use('/company', require('./routes/company'));
-app.use('/endoresment', require('./routes/endorsement'));
+app.use('/endorsement', require('./routes/endorsement'));
 app.use('/filter', require('./routes/filter'));
 app.use('/post', require('./routes/post'));
 app.use('/submission', require('./routes/submission'));
