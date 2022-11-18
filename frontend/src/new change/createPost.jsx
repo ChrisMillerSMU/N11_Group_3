@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { TextField } from './common/TextField';
-import { TextAreaField } from './common/textAreaField';
+import { TextField } from '../common/TextField';
+import { TextAreaField } from '../common/textAreaField';
 
 
 export const CreatePost = () => {
