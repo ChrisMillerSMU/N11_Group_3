@@ -1,5 +1,4 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 
 router.post('/athlete/', async(req, res, next) => {
     try {
@@ -13,7 +12,7 @@ router.post('/athlete/', async(req, res, next) => {
     next();
 });
 
-router.get('/athlete/', async(req, res, next) => {
+router.get('/', async(req, res, next) => {
     try {
         const result = await req.models.athlete.getAthletes();
         res.status(200).json(result);

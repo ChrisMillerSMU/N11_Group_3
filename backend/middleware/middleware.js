@@ -1,10 +1,11 @@
 const connect = require('../models/database');
-const athlete = require('./models/athlete');
-const company = require('./models/company');
-const endorsement = require('./models/endorsement');
-const filter = require('./models/filter');
-const post = require('./models/post');
-const submission = require('./models/submission');
+
+const athlete = require('../models/athlete');
+const company = require('../models/company');
+const endorsement = require('../models/endorsement');
+const filter = require('../models/filter');
+const post = require('../models/post');
+const submission = require('../models/submission');
 
 
 const create = async (req, res, next) => {
@@ -29,7 +30,7 @@ const disconnectMiddleware = (req, res, next) => {
 
 const request = (req, res, next) => {
     const url = req.protocol + "://" + req.get("host") + req.originalUrl;
-
+    console.log(url, req.protocol);
     console.log(req.method, Date.now(), url);
     next();
 }

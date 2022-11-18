@@ -2,8 +2,6 @@ var router = require('express').Router();
 const controller = require("../controllers/user");
 const auth = require("../middleware/auth");
 
-/* GET users listing. */
-// authenticate user
 router.post('/', async (req, res, next) => {
   try {
       const result = await controller.authenticateUser(req.body.username, req.body.password);

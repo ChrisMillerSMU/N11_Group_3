@@ -1,9 +1,9 @@
 const bcrypt = require("bcrypt");
 
 class Athlete {
-    constructor(_DBQuery, _disconnect) {
-        this.DBQuery = _DBQuery;
-        this.disconnect = _disconnect;
+    constructor(query, dis) {
+        this.DBQuery = query;
+        this.disconnect = dis;
     }
     close () {
         this.disconnect();
@@ -20,8 +20,9 @@ class Athlete {
         return this.findAthlete(school, jersey);
     };
 
-    async getAllAthletes() {
+    async getAthletes() {
         const result = await this.DBQuery("SELECT * FROM athlete");
+        console.log("athlete.js test", result);
         return result;
     }
 
