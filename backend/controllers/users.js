@@ -5,17 +5,17 @@ const Company = require('../models/companies' );
 
 const accessTokenSecret = 'mysupercoolsecret' ; // more cryptographic key - environmental variable
 
-const authenticateStudent = async (email, password ) => {
+const authenticateAthlete = async (email, password ) => {
     const user = await User.authenticateUser (email, password );
     if (user === null) {
         return user;
     }
-    const students = await Student.findUserByEmail (email);
-    console.log('Students' , students );
-    const accessToken = jwt.sign({ ...students [0], claims: ['student' ] }, accessTokenSecret );
+    const students = await Athlete.findUserByEmail (email);
+    console.log('Athletes' , athletes );
+    const accessToken = jwt.sign({ ...athletes [0], claims: ['athlete' ] }, accessTokenSecret );
     
     return accessToken;
 }
 module.exports = {
-    authenticateStudent
+    authenticateAthlete
 };
