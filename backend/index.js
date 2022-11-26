@@ -1,7 +1,9 @@
 const middleware = require("./middleware/middleware");
+const bodyParser = require('body-parser');
 
 const app = require('express')();
-app.use(require('body-parser').json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(require('cors')());
 app.use(middleware.create);
 app.use(middleware.request);

@@ -5,7 +5,7 @@ class Athlete {
         this.DBQuery = query;
         this.disconnect = dis;
     }
-    close () {
+    close() {
         this.disconnect();
     }
 
@@ -14,7 +14,7 @@ class Athlete {
         const jersey = body.jersey_number;
         const hashedPassword = bcrypt.hashSync(body.password, 10);
         const result = await this.DBQuery("INSERT INTO athlete(school_name, jersey_number, password) VALUES (?, ?, ?)",
-        [school, jersey, hashedPassword]);
+            [school, jersey, hashedPassword]);
         delete body.password;
         this.updateAthlete(school, jersey, body);
         return this.findAthlete(school, jersey);
@@ -23,7 +23,6 @@ class Athlete {
     async getAthletes() {
         console.log(this.DBQuery)
         const result = await this.DBQuery("SELECT * FROM athlete;");
-        console.log("athlete.js test", result);
         return result;
     }
 
@@ -42,11 +41,16 @@ class Athlete {
         return result;
     };
 
-    async updateAthlete(body) {
-        if (body.school_name !== undefined) {
-            await this.DBQuery("UPDATE athlete SET name = ? WHERE school_name = ? AND jersey_number = ?", [body.name, body.school_name, body.jersey_number]);
+    async updateAthlete(email, body) {
+        console.log("athlete model test", email);
+        if (body.email !== undefined) {
+            await this.DBQuery("UPDATE athlete SET email = ? WHERE email = ?", [body.email, email]);
+            email = body.email;
         }
-        const newRecord = await this.DBQuery("SELECT * FROM User WHERE username = ?", [username]);
+        if (body.instagram !== undefined) {
+            await this.DBQuery("UPDATE athlete SET instagram = ? WHERE email = ?", [body.instagram, email]);
+        }
+        const newRecord = await this.DBQuery("SELECT * FROM athlete WHERE email = ?", [email]);
         return newRecord;
     }
 
@@ -54,11 +58,11 @@ class Athlete {
         const hashedPassword = bcrypt.hashSync(password, 10);
         const result = await this.DBQuery("UPDATE User SET password = ? WHERE username = ?", [hashedPassword, username]);
     }
-    
+
     async updateUserEmail(username, email) {
         const results = await this.DBQuery("UPDATE User SET email = ? WHERE username = ?", [email, username]);
     };
-    
+
     async updateUserPhone(username, phone) {
         const results = await this.DBQuery("UPDATE User SET phone = ? WHERE username = ?", [phone, username]);
     };
