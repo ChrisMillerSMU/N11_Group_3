@@ -1,40 +1,38 @@
 
 
-CREATE DATABASE tv_advertisement;
+CREATE DATABASE N11_G3;
 
-USE tv_advertisement;
+USE N11_G3;
 
 CREATE TABLE athlete(
-    email VARCHAR(255),
-    school_name VARCHAR(255) DEFAULT 'School Name',
-    name VARCHAR(255) DEFAULT 'Athlete Name',
-
-    height VARCHAR (50) NOT NULL,
-    wingspan VARCHAR (50),
-    gender VARCHAR (10),
-    sport VARCHAR (255) DEFAULT 'Some Sport',
-    year INT,
-    stat VARCHAR (255),
-    twitter VARCHAR (255),
-    instagram VARCHAR (255),
-    password VARCHAR (255),
+    email varchar(255) DEFAULT '',
+    school_name varchar(255)DEFAULT 'School Name',
+    name varchar(255)DEFAULT 'Athlete Name',
+    height varchar(50) DEFAULT '',
+    wingspan varchar(50) DEFAULT '',
+    gender varchar(10) DEFAULT '',
+    sport varchar(255)DEFAULT 'Some Sport',
+    year INT DEFAULT 0,
+    stat varchar(255) DEFAULT '',
+    twitter varchar(255) DEFAULT '',
+    instagram varchar(255) DEFAULT '',
+    password varchar(255) DEFAULT '',
 
     PRIMARY KEY (email)
 );
 
 CREATE TABLE company(
-    email VARCHAR(255),
-    name VARCHAR(255),
-    password VARCHAR (255),
+    email varchar(255) DEFAULT '',
+    name varchar(255) DEFAULT '',
+    password varchar(255) DEFAULT '',
     PRIMARY KEY (email)
 );
 
 CREATE TABLE interest(
     interestID INT NOT NULL AUTO_INCREMENT,
-    athlete VARCHAR(255),
-    company VARCHAR(255),
-    mutual int,
-    name VARCHAR(255),
+    athlete varchar(255),
+    company varchar(255),
+    mutual int DEFAULT,
     PRIMARY KEY (interestID),
     FOREIGN KEY (athlete) REFERENCES athlete(email),
     FOREIGN KEY (company) REFERENCES company(email)
@@ -42,17 +40,17 @@ CREATE TABLE interest(
 
 CREATE TABLE post (
     postID INT NOT NULL AUTO_INCREMENT,
-    company VARCHAR(255),
+    company varchar(255),
     date_time DATETIME,
-    description VARCHAR(255),
+    description varchar(255) DEFAULT '',
     PRIMARY KEY (postID),
     FOREIGN KEY (company) REFERENCES company(email)
 );
 
 CREATE TABLE submission(
     submissionID INT NOT NULL AUTO_INCREMENT,
-    post VARCHAR(255),
-    athlete VARCHAR(255),
+    post INT,
+    athlete varchar(255),
     date_time DATETIME,
     PRIMARY KEY (submissionID),
     FOREIGN KEY (athlete) REFERENCES athlete(email),
@@ -62,7 +60,7 @@ CREATE TABLE submission(
 
 CREATE TABLE endorsement (
     endorsementID INT NOT NULL AUTO_INCREMENT,
-    submission VARCHAR(255),
+    submission INT,
     date_time DATETIME,
     PRIMARY KEY (endorsementID),
     FOREIGN KEY (submission) REFERENCES submission(submissionID)
@@ -71,3 +69,5 @@ CREATE TABLE endorsement (
 SHOW TABLES;
 
 INSERT INTO athlete VALUES ('test@test.com', 'test', 'test', 'test', 'test', 'test', 'test', 1, 'test', 'test', 'test', 'test');
+
+INSERT INTO company VALUES ('test@test.com', 'test', 'test');

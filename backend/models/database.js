@@ -9,13 +9,12 @@ const connect = async () => {
             user: 'root',
             password: 'Sped6854',
             insecureAuth: true,
-            database: 'tv_advertisement'
+            database: 'N11_G3'
         });
         
         await util.promisify(connection.connect).bind(connection);
 
         const DBQuery = util.promisify(connection.query).bind(connection);
-        console.log(DBQuery.prototype)
         const disconnect = () => connection.end();
         return { DBQuery, disconnect };
 

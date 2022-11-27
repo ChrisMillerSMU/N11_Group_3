@@ -9,32 +9,26 @@ class Athlete {
         this.disconnect();
     }
 
-    async add_athlete(body) {
-        const school = body.school_name;
-        const jersey = body.jersey_number;
-        const hashedPassword = bcrypt.hashSync(body.password, 10);
-        const result = await this.DBQuery("INSERT INTO athlete(school_name, jersey_number, password) VALUES (?, ?, ?)",
-            [school, jersey, hashedPassword]);
-        delete body.password;
-        this.updateAthlete(school, jersey, body);
-        return this.findAthlete(school, jersey);
+    async addAthlete(body) {
+        const email = body.email;
+        const result = await this.DBQuery("INSERT INTO athlete (email) VALUES (?)", [email]);
+        return this.updateAthlete(email, body);
     };
 
     async getAthletes() {
-        console.log(this.DBQuery)
         const result = await this.DBQuery("SELECT * FROM athlete;");
         return result;
     }
 
-    async findAthlete(school, jersey) {
-        const result = await this.DBQuery("SELECT * FROM athlete WHERE school_name = ? AND jersey_number = ?", [school, jersey]);
+    async findAthlete(email) {
+        const result = await this.DBQuery("SELECT * FROM athlete WHERE email = ?", [email]);
         return result;
     };
 
-    async authenticateAthlete(school, jersey, password) {
-        const athlete = await this.findAthlete(school, jersey);
-        if (athlete.length === 0) {
-            console.error(`Athlete ${jersey} from ${school} not found`);
+    async authenticateAthlete(email, password) {
+        const company = await this.findAthlete(email);
+        if (company.length === 0) {
+            console.error(`Athlete email: ${email} -> not found`);
             return false;
         }
         const result = await bcrypt.compare(password, user.password);
@@ -42,7 +36,6 @@ class Athlete {
     };
 
     async updateAthlete(email, body) {
-        console.log("athlete model test", email);
         if (body.email !== undefined) {
             await this.DBQuery("UPDATE athlete SET email = ? WHERE email = ?", [body.email, email]);
             email = body.email;
@@ -50,21 +43,37 @@ class Athlete {
         if (body.instagram !== undefined) {
             await this.DBQuery("UPDATE athlete SET instagram = ? WHERE email = ?", [body.instagram, email]);
         }
-        const newRecord = await this.DBQuery("SELECT * FROM athlete WHERE email = ?", [email]);
-        return newRecord;
+        if (body.school_name !== undefined) {
+            await this.DBQuery("UPDATE athlete SET school_name = ? WHERE email = ?", [body.school_name, email]);
+        }
+        if (body.name !== undefined) {
+            await this.DBQuery("UPDATE athlete SET name = ? WHERE email = ?", [body.name, email]);
+        }
+        if (body.height !== undefined) {
+            await this.DBQuery("UPDATE athlete SET height = ? WHERE email = ?", [body.height, email]);
+        }
+        if (body.wingspan !== undefined) {
+            await this.DBQuery("UPDATE athlete SET wingspan = ? WHERE email = ?", [body.wingspan, email]);
+        }
+        if (body.gender !== undefined) {
+            await this.DBQuery("UPDATE athlete SET gender = ? WHERE email = ?", [body.gender, email]);
+        }
+        if (body.sport !== undefined) {
+            await this.DBQuery("UPDATE athlete SET sport = ? WHERE email = ?", [body.sport, email]);
+        }
+        if (body.year !== undefined) {
+            await this.DBQuery("UPDATE athlete SET year = ? WHERE email = ?", [body.year, email]);
+        }
+        if (body.stat !== undefined) {
+            await this.DBQuery("UPDATE athlete SET stat = ? WHERE email = ?", [body.stat, email]);
+        }
+        if (body.twitter !== undefined) {
+            await this.DBQuery("UPDATE athlete SET twitter = ? WHERE email = ?", [body.twitter, email]);
+        }
+        if (body.password !== undefined) {
+            await this.DBQuery("UPDATE athlete SET password = ? WHERE email = ?", [body.password, email]);
+        }
+        return this.findAthlete(email);
     }
-
-    async updateUserPassword(username, password) {
-        const hashedPassword = bcrypt.hashSync(password, 10);
-        const result = await this.DBQuery("UPDATE User SET password = ? WHERE username = ?", [hashedPassword, username]);
-    }
-
-    async updateUserEmail(username, email) {
-        const results = await this.DBQuery("UPDATE User SET email = ? WHERE username = ?", [email, username]);
-    };
-
-    async updateUserPhone(username, phone) {
-        const results = await this.DBQuery("UPDATE User SET phone = ? WHERE username = ?", [phone, username]);
-    };
 }
 module.exports = Athlete;

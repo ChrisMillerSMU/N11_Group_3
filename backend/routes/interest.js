@@ -2,11 +2,11 @@ const router = require('express').Router();
 
 router.post('/', async (req, res, next) => {
     try {
-        const result = await req.models.company.addCompany(req.body);
+        const result = await req.models.interest.addInterest(req.body);
         res.status(200).json(result);
     }
     catch (err) {
-        console.error('Failed to create company account:', err);
+        console.error('Failed to create interest account:', err);
         res.status(500).json({ message: err.toString() });
     }
     next();
@@ -14,33 +14,34 @@ router.post('/', async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
     try {
-        const result = await req.models.company.getCompanies();
+        const result = await req.models.interest.getInterests();
         res.status(200).json(result);
     }
     catch (err) {
-        console.error('Failed to find company:', err);
+        console.error('Failed to find interest:', err);
         res.status(500).json({ message: err.toString() });
     }
     next();
 });
 
-router.get('/:email', async(req, res, next) => {
+router.get('/:interestID', async(req, res, next) => {
     try {
-        const result = await req.models.company.findCompany(req.params.email);
+        const result = await req.models.interest.findInterest(req.params.interestID);
         res.status(200).json(result);
     }
     catch (err) {
-        console.error('Failed to find company:', err);
+        console.error('Failed to find interest:', err);
         res.status(500).json({ message: err.toString() });
     }
     next();
 });
-router.put('/:email', async (req, res, next) => {
+
+router.put('/:interestID', async (req, res, next) => {
     try {
-        const result = await req.models.company.updateCompany(req.params.email, req.body);
+        const result = await req.models.interest.updateInterest(req.params.interestID, req.body);
         res.status(201).json(result);
     } catch (err) {
-        console.error('Failed to update company:', err);
+        console.error('Failed to update interest:', err);
         res.status(500).json({ message: err.toString() });
     }
     next();
