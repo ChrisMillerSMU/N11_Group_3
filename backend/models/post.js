@@ -22,6 +22,17 @@ class Post {
         const result = await this.DBQuery("SELECT * FROM post WHERE postID = ?", [postID]);
         return result;
     };
+
+    async updatePost(postID) {
+        if (body.postID !== undefined) {
+            await this.DBQuery("UPDATE athlete SET email = ? WHERE email = ?", [body.email, email]);
+            email = body.email;
+        }
+        if (body.sport !== undefined) {
+            await this.DBQuery("UPDATE athlete SET sport = ? WHERE email = ?", [body.sport, email]);
+        }
+        return this.findAthlete(email);
+    }
 }
 
 module.exports = Post;

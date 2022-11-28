@@ -1,53 +1,51 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/company/', async(req, res, next) => {
+router.post('/post/', async (req, res, next) => {
     try {
-        const result = await req.models.company.add_company(req.body);
+        const result = await req.models.post.add_post(req.body);
         res.status(200).json(result);
     }
     catch (err) {
-        console.error('Create account - Failed:', err);
+        console.error('Create post - Failed:', err);
         res.status(500).json({ message: err.toString() });
     }
     next();
 });
 
-router.get('/company/', async(req, res, next) => {
+router.get('/post/', async (req, res, next) => {
     try {
-        const result = await req.models.athlete.getCompanies();
+        const result = await req.models.post.getPosts();
         res.status(200).json(result);
     }
     catch (err) {
-        console.error('Failed to find user:', err);
+        console.error('Failed to find posts:', err);
         res.status(500).json({ message: err.toString() });
     }
     next();
 });
 
-router.get('/athlete/:school/:jersey', async(req, res, next) => {
+router.get('/post/:postID', async (req, res, next) => {
     try {
-        const result = await req.models.athlete.getAthlete(req.params.school, req.params.jersey);
+        const result = await req.models.post.findPost(req.params.postID);
         res.status(200).json(result);
     }
     catch (err) {
-        console.error('Failed to find user:', err);
+        console.error('Failed to find post:', err);
         res.status(500).json({ message: err.toString() });
     }
     next();
 });
 
-router.put('/athlete/:username', async (req, res, next) => {
+router.put('/post/:postID', async (req, res, next) => {
     try {
-        const user = req.params.username;
-        const body = req.body;
-        const result = await req.models.user.updateUserData(user, body);
+        const result = await req.models.user.updateUserData(req.params.postID, req.body);
         res.status(201).json(result);
     } catch (err) {
-        console.error('Failed to update:', err);
+        console.error('Failed to update post:', err);
         res.status(500).json({ message: err.toString() });
     }
     next();
-  });
-  
-  module.exports = router;
+});
+
+module.exports = router;
