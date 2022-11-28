@@ -1,33 +1,21 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/company/', async(req, res, next) => {
+router.post('/submission/', async (req, res, next) => {
     try {
-        const result = await req.models.company.add_company(req.body);
+        const result = await req.models.submission.add_submission(req.body);
         res.status(200).json(result);
     }
     catch (err) {
-        console.error('Create account - Failed:', err);
+        console.error('Create submission - Failed:', err);
         res.status(500).json({ message: err.toString() });
     }
     next();
 });
 
-router.get('/company/', async(req, res, next) => {
+router.get('/submission/', async (req, res, next) => {
     try {
-        const result = await req.models.athlete.getCompanies();
-        res.status(200).json(result);
-    }
-    catch (err) {
-        console.error('Failed to find user:', err);
-        res.status(500).json({ message: err.toString() });
-    }
-    next();
-});
-
-router.get('/athlete/:school/:jersey', async(req, res, next) => {
-    try {
-        const result = await req.models.athlete.getAthlete(req.params.school, req.params.jersey);
+        const result = await req.models.submission.getSubmissions();
         res.status(200).json(result);
     }
     catch (err) {
@@ -37,17 +25,38 @@ router.get('/athlete/:school/:jersey', async(req, res, next) => {
     next();
 });
 
-router.put('/athlete/:username', async (req, res, next) => {
+router.get('/submission/:submissionID', async (req, res, next) => {
     try {
-        const user = req.params.username;
-        const body = req.body;
-        const result = await req.models.user.updateUserData(user, body);
+        const result = await req.models.submission.findSubmission(req.params.submissionID);
+        res.status(200).json(result);
+    }
+    catch (err) {
+        console.error('Failed to find user:', err);
+        res.status(500).json({ message: err.toString() });
+    }
+    next();
+});
+
+router.put('/submission/:submissionID', async (req, res, next) => {
+    try {
+        const result = await req.models.submission.updateSubmission(req.params.submissionID, req.body);
         res.status(201).json(result);
     } catch (err) {
-        console.error('Failed to update:', err);
+        console.error('Failed to update submission:', err);
         res.status(500).json({ message: err.toString() });
     }
     next();
-  });
-  
-  module.exports = router;
+});
+
+router.delete('/submission/:submissionID', async (req, res, next) => {
+    try {
+        const result = await req.models.submission.deleteSubmission(req.params.submissionID);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to delete submission:', err);
+        res.status(500).json({ message: err.toString() });
+    }
+    next();
+});
+
+module.exports = router;

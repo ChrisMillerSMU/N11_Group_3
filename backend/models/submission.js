@@ -8,9 +8,8 @@ class Submission {
     }
 
     async addSubmission(body) {
-        const result = await this.DBQuery("INSERT INTO submission (post, athlete, date_time) VALUES (?, ?)", [body.post, body.athlete, date.now()]);
-        const submission = await this.DBQuery("SELECT LAST_INSERT_ID() FROM submission");
-        return submission;
+        const result = await this.DBQuery("INSERT INTO submission (post, athlete, date_time) VALUES (?, ?, NOW())", [body.post, body.athlete]);
+        return this.findSubmission(result.insertId);
     };
 
     async getSubmissions() {
@@ -22,6 +21,10 @@ class Submission {
         const result = await this.DBQuery("SELECT * FROM submission WHERE submissionID = ?", [submissionID]);
         return result;
     };
+
+    async deleteSubmission(submissionID) {
+        const result = await this.DBQuery("DELETE FROM submission WHERE submissionID = ?", [submissionID]);
+    }
 }
 
 module.exports = Submission;
