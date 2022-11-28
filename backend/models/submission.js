@@ -15,7 +15,12 @@ class Submission {
     async getSubmissions() {
         const result = await this.DBQuery("SELECT * FROM submission;");
         return result;
-    }
+    };
+
+    async findSubmissionByPost(postID) {
+        const result = await this.DBQuery("SELECT * FROM submission WHERE post = ?", [postID]);
+        return result;
+    };
 
     async findSubmission(submissionID) {
         const result = await this.DBQuery("SELECT * FROM submission WHERE submissionID = ?", [submissionID]);
@@ -24,7 +29,7 @@ class Submission {
 
     async deleteSubmission(submissionID) {
         const result = await this.DBQuery("DELETE FROM submission WHERE submissionID = ?", [submissionID]);
-    }
+    };
 }
 
 module.exports = Submission;

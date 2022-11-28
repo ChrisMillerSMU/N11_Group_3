@@ -14,7 +14,7 @@ router.post('/', async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
     try {
-        const result = await req.models.endorsement.getCompanies();
+        const result = await req.models.endorsement.getEndorsements();
         res.status(200).json(result);
     }
     catch (err) {

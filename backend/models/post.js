@@ -7,10 +7,9 @@ class Post {
         this.disconnect();
     }
 
-    async addPost(body) {
-        const result = await this.DBQuery("INSERT INTO post (company, date_time) VALUES (?, ?)", [body.company, date.now()]);
-        const post = await this.DBQuery("SELECT LAST_INSERT_ID() FROM post");
-        return post;
+    async createPost(body) {
+        const result = await this.DBQuery("INSERT INTO post (company, date_time) VALUES (?, NOW())", [body.company]);
+        return this.updatePost(result.insertId, body);
     };
 
     async getPosts() {
@@ -23,15 +22,11 @@ class Post {
         return result;
     };
 
-    async updatePost(postID) {
-        if (body.postID !== undefined) {
-            await this.DBQuery("UPDATE athlete SET email = ? WHERE email = ?", [body.email, email]);
-            email = body.email;
+    async updatePost(postID, body) {
+        if (body.description !== undefined) {
+            await this.DBQuery("UPDATE post SET description = ? WHERE postID = ?", [body.description, postID]);
         }
-        if (body.sport !== undefined) {
-            await this.DBQuery("UPDATE athlete SET sport = ? WHERE email = ?", [body.sport, email]);
-        }
-        return this.findAthlete(email);
+        return this.findPost(postID);
     }
 }
 

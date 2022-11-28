@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/submission/', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     try {
-        const result = await req.models.submission.add_submission(req.body);
+        const result = await req.models.submission.addSubmission(req.body);
         res.status(200).json(result);
     }
     catch (err) {
@@ -13,7 +13,7 @@ router.post('/submission/', async (req, res, next) => {
     next();
 });
 
-router.get('/submission/', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
         const result = await req.models.submission.getSubmissions();
         res.status(200).json(result);
@@ -25,7 +25,7 @@ router.get('/submission/', async (req, res, next) => {
     next();
 });
 
-router.get('/submission/:submissionID', async (req, res, next) => {
+router.get('/:submissionID', async (req, res, next) => {
     try {
         const result = await req.models.submission.findSubmission(req.params.submissionID);
         res.status(200).json(result);
@@ -37,18 +37,19 @@ router.get('/submission/:submissionID', async (req, res, next) => {
     next();
 });
 
-router.put('/submission/:submissionID', async (req, res, next) => {
+router.get('/ID/:postID', async (req, res, next) => {
     try {
-        const result = await req.models.submission.updateSubmission(req.params.submissionID, req.body);
-        res.status(201).json(result);
-    } catch (err) {
-        console.error('Failed to update submission:', err);
+        const result = await req.models.submission.findSubmissionByPost(req.params.postID);
+        res.status(200).json(result);
+    }
+    catch (err) {
+        console.error('Failed to find submissions for post:', err);
         res.status(500).json({ message: err.toString() });
     }
     next();
 });
 
-router.delete('/submission/:submissionID', async (req, res, next) => {
+router.delete('/:submissionID', async (req, res, next) => {
     try {
         const result = await req.models.submission.deleteSubmission(req.params.submissionID);
         res.status(201).json(result);

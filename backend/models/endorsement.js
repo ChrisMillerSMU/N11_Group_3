@@ -8,9 +8,8 @@ class Endorsement {
     }
 
     async addEndorsement(body) {
-        const result = await this.DBQuery("INSERT INTO endorsement (submission, date_time) VALUES (?, ?)", [body.submission, date.now()]);
-        const endorsement = await this.DBQuery("SELECT LAST_INSERT_ID() FROM endorsement");
-        return endorsement;
+        const result = await this.DBQuery("INSERT INTO endorsement (submission, date_time) VALUES (?, NOW())", [body.submission]);
+        return this.findEndorsement(result.insertId);
     };
 
     async getEndorsements() {
@@ -19,6 +18,7 @@ class Endorsement {
     }
 
     async findEndorsement(endorsementID) {
+        console.log(endorsementID);
         const result = await this.DBQuery("SELECT * FROM endorsement WHERE endorsementID = ?", [endorsementID]);
         return result;
     };
