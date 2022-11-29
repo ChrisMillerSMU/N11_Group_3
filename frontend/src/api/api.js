@@ -58,8 +58,8 @@ export const register = (user) => new Promise((resolve, reject) => {
         });
 });
 
-export const login = (info, setLogin=undefined) => new Promise((resolve, reject) => {
-    axios.post(`${apiEndpoint}/session/`, info, apiConfig)
+export const athleteLogin = (info, setLogin=undefined) => new Promise((resolve, reject) => {
+    axios.post(`${apiEndpoint}/athlete/`, info, apiConfig)
         .then(x => {
           token = x.data;
           apiConfig = {

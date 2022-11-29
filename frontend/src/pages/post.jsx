@@ -1,8 +1,6 @@
 import { useEffect } from "react"
 
-export const Post = () => {
-
-    
+export const Post = ({account, post}) => {
     useEffect(() => {
         //load all posts
     }, []);
@@ -10,15 +8,15 @@ export const Post = () => {
     return <>
         <div className="card">
             
-            <div className="row">
-                Username
+            <div className="row ms-2">
+                Company contact: {post.company}
             </div>
 
-            <div class="text-center">
+            <div className="text-center">
                 Job title
             </div>
-            <div>job description</div>
-            <button type="button">apply</button>
+            <div className="ms-2">{post.description}</div>
+            { account.isAthlete && <button type="button">apply</button> }
         </div>
     </>
 }

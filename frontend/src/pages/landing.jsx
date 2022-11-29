@@ -1,21 +1,31 @@
 import { useState } from "react";
 import "./styles.css";
-
+import {useNavigate} from 'react-router-dom';
 
 export const Landing = () => {
+
+  const navigate = useNavigate();
+
   return (
     <>
       <h1>Recruiter</h1>
       <nav>
         <ul>
           <li>
-            <button type="button">Log in</button>
+            <button type="button"
+            onClick={() => {
+              navigate('/Login');
+            }}>Log in</button>
+            <button type="button"
+            onClick={() => {
+              navigate('/Register');
+            }}>Register</button>
           </li>
         </ul>
       </nav>
 
       <section id="opening">
-        <div class="crop">
+        <div className="crop">
           <img src="https://static01.nyt.com/images/2021/10/23/business/23DB-NOCERA/23DB-NOCERA-superJumbo.jpg?quality=75&auto=webp"></img>
         </div>
         <h2>Endorsing made easy</h2>

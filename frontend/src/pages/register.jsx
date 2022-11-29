@@ -3,13 +3,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../api/api"
 
-export function Login({setAccount}) {
+export function Register() {
   const navigate = useNavigate();
 
-  const [athleteEmail, setAthleteEmail] = useState("");
-  const [athletePassword, setAthletePassword] = useState("");
-  const [companyEmail, setCompanyEmail] = useState("");
-  const [companyPassword, setCompanyPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <div>
@@ -20,8 +18,8 @@ export function Login({setAccount}) {
           name="email"
           id="email"
           className="form-control"
-          value={athleteEmail}
-          onChange={(event) => setAthleteEmail(event.target.value)}
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
         />
       </div>
       <div className="form-group mb-3">
@@ -31,15 +29,15 @@ export function Login({setAccount}) {
           name="password"
           id="password"
           className="form-control"
-          value={athletePassword}
-          onChange={(event) => setAthletePassword(event.target.value)}
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
         />
       </div>
       <button type="button"
-            onClick={() => {
-              setAccount({email:athleteEmail, password:athletePassword, isAthlete: true});
-              navigate('/Home');
-            }}>Athlete Log in</button>
+        onClick={() => {
+          navigate("/Home");
+        }}
+      >Athlete Register</button>
       <div className="form-group mb-3">
         <label htmlFor="email">Email:</label>
         <input
@@ -47,8 +45,8 @@ export function Login({setAccount}) {
           name="email"
           id="email"
           className="form-control"
-          value={companyEmail}
-          onChange={(event) => setCompanyEmail(event.target.value)}
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
         />
       </div>
       <div className="form-group mb-3">
@@ -58,18 +56,17 @@ export function Login({setAccount}) {
           name="password"
           id="password"
           className="form-control"
-          value={companyPassword}
-          onChange={(event) => setCompanyPassword(event.target.value)}
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
         />
       </div>
       <button
         type="button"
         onClick={() => {
-          setAccount({email:companyEmail, password:companyPassword, isAthlete: false});
           navigate("/Home");
         }}
       >
-        Company Log in
+        Company Register
       </button>
     </div>
   );
