@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./styles.css";
 
 
-export const Homepage = () => {
+export const Landing = () => {
   return (
     <>
       <h1>Recruiter</h1>
