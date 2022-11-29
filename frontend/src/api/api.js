@@ -71,8 +71,8 @@ export const register = (user) => new Promise((resolve, reject) => {
         });
 });
 
-export const athleteLogin = (info, success=undefined) => new Promise((resolve, reject) => {
-    axios.post(`${apiEndpoint}/session/true`, info, apiConfig)
+export const login = (info, success=undefined, isAthlete) => new Promise((resolve, reject) => {
+    axios.post(`${apiEndpoint}/session/${isAthlete}`, info, apiConfig)
         .then(x => {
           token = x.data;
           apiConfig = {
@@ -86,23 +86,6 @@ export const athleteLogin = (info, success=undefined) => new Promise((resolve, r
         .catch(x => {
           reject(x);
         });
-});
-
-export const companyLogin = (info, success=undefined) => new Promise((resolve, reject) => {
-  axios.post(`${apiEndpoint}/session/false`, info, apiConfig)
-      .then(x => {
-        token = x.data;
-        apiConfig = {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        };
-        resolve(x.data);
-        success();
-      })
-      .catch(x => {
-        reject(x);
-      });
 });
 
 export const editUser = (username, params) => new Promise((resolve, reject) =>{

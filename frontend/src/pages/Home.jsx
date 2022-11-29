@@ -7,6 +7,9 @@ export const Home = ({ account, setAccount }) => {
 
   const [posts, setsPost] = useState([{ postID: 1, company: 1, date_time: new Date().toLocaleDateString(), description: "This is a test description" }, { postID: 1, company: 1, date_time: new Date().toLocaleDateString(), description: "This is a test description" }, { postID: 1, company: 1, date_time: new Date().toLocaleDateString(), description: "This is a test description" }]);
   const navigate = useNavigate();
+  if(!account){
+    return <>loading...</>;
+  }
   return <>
     <div className="container">
       <nav>
@@ -19,7 +22,7 @@ export const Home = ({ account, setAccount }) => {
         >
           Log Out
         </button>
-        {account.isAthlete == 'true' && <button
+        {account.isAthlete && <button
           type="button"
           onClick={() => {
             navigate("/CreatePost");

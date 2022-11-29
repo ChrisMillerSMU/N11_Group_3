@@ -11,7 +11,7 @@ export const Post = ({ account, post }) => {
                 Company contact: {post.company}
             </div>
             <div className="ms-2">{post.description}</div>
-            {account.school != undefined && <button type="button"
+            {account.isAthlete && <button type="button"
                 onClick={() => {
                     navigate("/home")
                 }}>apply</button>}

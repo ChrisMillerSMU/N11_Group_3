@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { athleteLogin, companyEmail, companyLogin } from "../api/api"
+import { login } from "../api/api"
 
 export function Login({ setAccount }) {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ export function Login({ setAccount }) {
       <button type="button"
         onClick={() => {
           if (athleteEmail != '' && athletePassword != '') {
-            athleteLogin({email:athleteEmail, password:athletePassword}, athleteSuccess);
+            login({email:athleteEmail, password:athletePassword}, athleteSuccess, 'true');
           }
         }}>Athlete Log in</button>
       <div className="form-group mb-3">
@@ -76,7 +76,7 @@ export function Login({ setAccount }) {
         type="button"
         onClick={() => {
           if (companyEmail != '' && companyPassword != '') {
-            companyLogin({ email: companyEmail, password: companyPassword }, companySuccess);
+            login({ email: companyEmail, password: companyPassword }, companySuccess, 'false');
             navigate("/Home");
           }
         }}
