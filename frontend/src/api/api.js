@@ -8,8 +8,8 @@ export const getToken = () => {
   return token;
 }
 
-export const getProductById = (productId) => new Promise((resolve, reject) => {
-    axios.get(`${apiEndpoint}/athlete/${productId}`, apiConfig)
+export const getPostById = (postID) => new Promise((resolve, reject) => {
+    axios.get(`${apiEndpoint}/post/${postID}`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -26,13 +26,17 @@ export const getAthleteByEmail = (email) => new Promise((resolve, reject) => {
       });
 });
 
-export const getPosts = (params) => new Promise((resolve, reject) => {
-    let _apiConfig = { ...apiConfig };
-    if (params) {
-        _apiConfig.params = params;
-    }
+export const getCompanyByEmail = (email) => new Promise((resolve, reject) => {
+  axios.get(`${apiEndpoint}/company/${email}`, apiConfig)
+      .then(x => resolve(x.data))
+      .catch(x => {
+          alert(x);
+          reject(x);
+      });
+});
 
-    axios.get(`${apiEndpoint}/land`, _apiConfig)
+export const getPosts = (params) => new Promise((resolve, reject) => {
+    axios.get(`${apiEndpoint}/post`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -40,8 +44,8 @@ export const getPosts = (params) => new Promise((resolve, reject) => {
         });
 });
 
-export const addProduct = (product) => new Promise((resolve, reject) => {
-    axios.post(`${apiEndpoint}/land/`, product, apiConfig)
+export const addPost = (post) => new Promise((resolve, reject) => {
+    axios.post(`${apiEndpoint}/post/`, post, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
           alert(x);
@@ -49,8 +53,8 @@ export const addProduct = (product) => new Promise((resolve, reject) => {
         });
 });
 
-export const addReview = (productId, review) => new Promise((resolve, reject) => {
-    axios.post(`${apiEndpoint}/review/land/${productId}`, review, apiConfig)
+export const addInterest = (post) => new Promise((resolve, reject) => {
+    axios.post(`${apiEndpoint}/interst`, post, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -67,8 +71,8 @@ export const register = (user) => new Promise((resolve, reject) => {
         });
 });
 
-export const athleteLogin = (info, setLogin=undefined) => new Promise((resolve, reject) => {
-    axios.post(`${apiEndpoint}/athlete/`, info, apiConfig)
+export const athleteLogin = (info, success=undefined) => new Promise((resolve, reject) => {
+    axios.post(`${apiEndpoint}/session/true`, info, apiConfig)
         .then(x => {
           token = x.data;
           apiConfig = {
@@ -77,16 +81,28 @@ export const athleteLogin = (info, setLogin=undefined) => new Promise((resolve, 
               }
           };
           resolve(x.data);
-          if(setLogin){
-            setLogin('success');
-          }
+          success();
         })
         .catch(x => {
-          if(setLogin){
-            setLogin('failed');
-          }
           reject(x);
         });
+});
+
+export const companyLogin = (info, success=undefined) => new Promise((resolve, reject) => {
+  axios.post(`${apiEndpoint}/session/false`, info, apiConfig)
+      .then(x => {
+        token = x.data;
+        apiConfig = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        };
+        resolve(x.data);
+        success();
+      })
+      .catch(x => {
+        reject(x);
+      });
 });
 
 export const editUser = (username, params) => new Promise((resolve, reject) =>{

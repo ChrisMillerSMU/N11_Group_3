@@ -19,7 +19,7 @@ export const Home = ({ account, setAccount }) => {
         >
           Log Out
         </button>
-        {account.school == undefined && <button
+        {account.isAthlete == 'true' && <button
           type="button"
           onClick={() => {
             navigate("/CreatePost");
@@ -28,7 +28,7 @@ export const Home = ({ account, setAccount }) => {
       </nav>
       <div className="mt-5">
         {posts.map((post) => <>
-          <Post account={account} post={post} />
+          <Post key={post.postID.toString()} account={account} post={post} />
         </>)}
       </div>
     </div>

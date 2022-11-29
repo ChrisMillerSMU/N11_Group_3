@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAthleteByEmail, login } from "../api/api"
+import { athleteLogin, companyEmail, companyLogin } from "../api/api"
 
 export function Login({ setAccount }) {
   const navigate = useNavigate();
@@ -10,6 +10,15 @@ export function Login({ setAccount }) {
   const [athletePassword, setAthletePassword] = useState("");
   const [companyEmail, setCompanyEmail] = useState("");
   const [companyPassword, setCompanyPassword] = useState("");
+
+  const athleteSuccess = () => {
+    setAccount({ email: athleteEmail, password: athletePassword, isAthlete: true });
+    navigate('/home');
+  }
+  const companySuccess = () => {
+    setAccount({ email: companyEmail, password: companyPassword, isAthlete: false });
+    navigate('/home');
+  }
 
   return (
     <div>
@@ -37,10 +46,8 @@ export function Login({ setAccount }) {
       </div>
       <button type="button"
         onClick={() => {
-          console.log(getAthleteByEmail(athleteEmail));
           if (athleteEmail != '' && athletePassword != '') {
-            setAccount({ email: athleteEmail, password: athletePassword, isAthlete: true });
-            navigate('/Home');
+            athleteLogin({email:athleteEmail, password:athletePassword}, athleteSuccess);
           }
         }}>Athlete Log in</button>
       <div className="form-group mb-3">
@@ -69,7 +76,7 @@ export function Login({ setAccount }) {
         type="button"
         onClick={() => {
           if (companyEmail != '' && companyPassword != '') {
-            setAccount({ email: companyEmail, password: companyPassword, isAthlete: false });
+            companyLogin({ email: companyEmail, password: companyPassword }, companySuccess);
             navigate("/Home");
           }
         }}
