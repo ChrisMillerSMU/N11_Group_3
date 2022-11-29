@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../api/api"
+import { getAthleteByEmail, login } from "../api/api"
 
 export function Login({ setAccount }) {
   const navigate = useNavigate();
@@ -37,6 +37,7 @@ export function Login({ setAccount }) {
       </div>
       <button type="button"
         onClick={() => {
+          console.log(getAthleteByEmail(athleteEmail));
           if (athleteEmail != '' && athletePassword != '') {
             setAccount({ email: athleteEmail, password: athletePassword, isAthlete: true });
             navigate('/Home');

@@ -9,9 +9,21 @@ class Company {
         this.disconnect();
     }
 
+    async authenticate(email, password) {
+        const users = await this.findCompany(email);
+        if (users.length === 0) {
+            console.error(`No company matched the email ${email}`);
+            return false;
+        }
+        const user = users[0];
+        const validPassword = await bcrypt.compare(password, user.password);
+        return validPassword;
+    };
+
     async addCompany(body) {
         const email = body.email;
-        const result = await this.DBQuery("INSERT INTO company (email) VALUES (?)", [email]);
+        const hashedPassword = bcrypt.hashSync(body.password, 10);
+        const result = await this.DBQuery("INSERT INTO company (email, password) VALUES (?, ?)", [email, hashedPassword]);
         return this.updateCompany(email, body);
     };
 
@@ -73,7 +85,8 @@ class Company {
             await this.DBQuery("UPDATE company SET twitter = ? WHERE email = ?", [body.twitter, email]);
         }
         if (body.password !== undefined) {
-            await this.DBQuery("UPDATE company SET password = ? WHERE email = ?", [body.password, email]);
+            const hashedPassword = bcrypt.hashSync(body.password, 10);
+            await this.DBQuery("UPDATE company SET password = ? WHERE email = ?", [hashedPassword, email]);
         }
         return this.findCompany(email);
     }

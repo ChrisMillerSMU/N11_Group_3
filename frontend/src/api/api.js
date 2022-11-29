@@ -9,7 +9,7 @@ export const getToken = () => {
 }
 
 export const getProductById = (productId) => new Promise((resolve, reject) => {
-    axios.get(`${apiEndpoint}/land/${productId}`, apiConfig)
+    axios.get(`${apiEndpoint}/athlete/${productId}`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -17,7 +17,16 @@ export const getProductById = (productId) => new Promise((resolve, reject) => {
         });
 });
 
-export const getProducts = (params) => new Promise((resolve, reject) => {
+export const getAthleteByEmail = (email) => new Promise((resolve, reject) => {
+  axios.get(`${apiEndpoint}/athlete/${email}`, apiConfig)
+      .then(x => resolve(x.data))
+      .catch(x => {
+          alert(x);
+          reject(x);
+      });
+});
+
+export const getPosts = (params) => new Promise((resolve, reject) => {
     let _apiConfig = { ...apiConfig };
     if (params) {
         _apiConfig.params = params;
