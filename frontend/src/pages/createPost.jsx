@@ -15,11 +15,6 @@ export const CreatePost = () => {
             <li className="list-group-item">
                 <div className="row">
                     <div className="col-12">
-                        <TextField label="Job Title"
-                            value={newJobTitle}
-                            setValue={setNewJobTitle} />
-                    </div>
-                    <div className="col-12">
                         <TextAreaField label="description"
                             value={newJobDescription}
                             setValue={setNewJobDescription} />

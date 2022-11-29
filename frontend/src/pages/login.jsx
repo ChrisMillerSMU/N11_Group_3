@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../api/api"
 
-export function Login({setAccount}) {
+export function Login({ setAccount }) {
   const navigate = useNavigate();
 
   const [athleteEmail, setAthleteEmail] = useState("");
@@ -36,10 +36,12 @@ export function Login({setAccount}) {
         />
       </div>
       <button type="button"
-            onClick={() => {
-              setAccount({email:athleteEmail, password:athletePassword, isAthlete: true});
-              navigate('/Home');
-            }}>Athlete Log in</button>
+        onClick={() => {
+          if (athleteEmail != '' && athletePassword != '') {
+            setAccount({ email: athleteEmail, password: athletePassword, isAthlete: true });
+            navigate('/Home');
+          }
+        }}>Athlete Log in</button>
       <div className="form-group mb-3">
         <label htmlFor="email">Email:</label>
         <input
@@ -65,8 +67,10 @@ export function Login({setAccount}) {
       <button
         type="button"
         onClick={() => {
-          setAccount({email:companyEmail, password:companyPassword, isAthlete: false});
-          navigate("/Home");
+          if (companyEmail != '' && companyPassword != '') {
+            setAccount({ email: companyEmail, password: companyPassword, isAthlete: false });
+            navigate("/Home");
+          }
         }}
       >
         Company Log in

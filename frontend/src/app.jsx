@@ -1,19 +1,20 @@
 import { CreatePost } from './pages/createPost.jsx';
-import { Home } from './pages/Home.jsx';
+import { Home } from './pages/home.jsx';
 import { Landing } from './pages/landing.jsx';
 import { Login } from './pages/login.jsx';
-import { Post } from './pages/post.jsx';
 import { Register } from './pages/register.jsx';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { Settings } from './pages/settings.jsx';
+
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { useEffect, useState } from "react";
 import React from 'react';
 
 
 export const App = () => {
-  const [ account, setAccount ] = useState(undefined);
+  const [account, setAccount] = useState(undefined);
 
-  function setAccountValue(value){
+  function setAccountValue(value) {
     setAccount(value);
   }
   return <>
@@ -22,12 +23,12 @@ export const App = () => {
         <div className="h-100 overflow-scroll">
           <Router>
             <Routes>
-              <Route path="/" element={<Landing/>} ></Route>
-              <Route path="/Home" element={<Home account={account}/>} ></Route>
-              <Route path="/Login" element={<Login setAccount={setAccount}/>} ></Route>
-              <Route path="/Post" element={<Post/>} ></Route>
-              <Route path="/CreatePost" element={<CreatePost/>} ></Route>
-              <Route path="/REgister" element={<Register/>} ></Route>
+              <Route path="/" element={<Landing />} ></Route>
+              <Route path="/home" element={<Home account={account} setAccount={setAccount} />} ></Route>
+              <Route path="/login" element={<Login setAccount={setAccount} />} ></Route>
+              <Route path="/createPost" element={<CreatePost />} ></Route>
+              <Route path="/register" element={<Register setAccount={setAccount} />} ></Route>
+              <Route path="/settings" element={<Settings account={account} setAccount={setAccount} />} ></Route>
             </Routes>
           </Router>
         </div>
