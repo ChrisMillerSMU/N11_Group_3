@@ -1,4 +1,4 @@
-import "bootstrap/dist/css/bootstrap.css";
+//import "bootstrap/dist/css/bootstrap.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerAthlete, registerCompany, login } from "../api/api"
