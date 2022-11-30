@@ -69,24 +69,17 @@ CREATE TABLE endorsement (
 SHOW TABLES;
 
 
-
-email varchar(255) DEFAULT '',
-    school_name varchar(255)DEFAULT 'School Name',
-    name varchar(255)DEFAULT 'Athlete Name',
-    height varchar(50) DEFAULT '',
-    wingspan varchar(50) DEFAULT '',
-    gender varchar(10) DEFAULT '',
-    sport varchar(255)DEFAULT 'Some Sport',
-    year INT DEFAULT 0,
-    stat varchar(255) DEFAULT '',
-    twitter varchar(255) DEFAULT '',
-    instagram varchar(255) DEFAULT '',
-    password varchar(255) DEFAULT '',
 INSERT INTO athlete VALUES 
 ('arodgers@ucb.edu', 'UC Berkeley', 'Aaron Rodgers', '6''2"', '6''4.75"', 'Male', 'Football', 3, '4000 passing yards in the last season', '@aaronrodgers', '@aaronrodgers', 'gofootball'),
 ('rasheer@smu.edu', 'SMU', 'Rashee Rice', '6''1"', '5''11"', 'Male', 'Football', 4, '1500 receiving yards in the last season', '@rasheerice', '@rasheerice', 'ponyup'),
-('')
+('alexmorgan@stanford.edu', 'Stanford', 'Alex Morgan', '5''7"', '5''1"', 'Female', 'Soccer', 2, '12 goals scored in the last season', '@alexmorgan', '@alexmorgan', 'soccerrocks');
 
-;
+email varchar(255) DEFAULT '',
+    name varchar(255) DEFAULT '',
+    password varchar(255) DEFAULT '',
+    PRIMARY KEY (email)
 
-INSERT INTO company VALUES ('test@test.com', 'test', 'test');
+INSERT INTO company VALUES 
+('nike@nike.com', 'Nike', 'swoosh'),
+('gatorade@gatorade.com', 'Gatorade', 'getfueled'),
+('beats@beat.com', 'Beats', 'soundmatters');
