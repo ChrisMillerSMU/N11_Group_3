@@ -16,6 +16,7 @@ export const Submission = ({ submission }) => {
 
   return (
     <>
+      {athlete &&
       <div className="card ps-2">
         <div>Applicant: {athlete.name}</div>
         <div>Sport: {athlete.sport}</div>
@@ -43,6 +44,7 @@ export const Submission = ({ submission }) => {
         </button>
         <div>Submitted on {date.getMonth()}-{date.getDate()}-{date.getFullYear()} at {date.getHours() % 12}:{date.getMinutes()}</div>
       </div>
+    }
     </>
   );
 };
