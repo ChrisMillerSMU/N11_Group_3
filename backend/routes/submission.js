@@ -49,6 +49,18 @@ router.get('/ID/:postID', async (req, res, next) => {
     next();
 });
 
+router.get('/athlete/:postID/:athlete', async (req, res, next) => {
+    try {
+        const result = await req.models.submission.findSubmissionByAthlete(req.params.postID, req.params.athlete);
+        res.status(200).json(result);
+    }
+    catch (err) {
+        console.error('Failed to find submissions for post:', err);
+        res.status(500).json({ message: err.toString() });
+    }
+    next();
+});
+
 router.delete('/:submissionID', async (req, res, next) => {
     try {
         const result = await req.models.submission.deleteSubmission(req.params.submissionID);

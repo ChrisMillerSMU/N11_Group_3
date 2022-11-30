@@ -22,6 +22,9 @@ export function Login({ setAccount }) {
 
   return (
     <div>
+      <button type="button"
+      onClick={() => { navigate('/');
+      }}> Back </button>
       <div className="form-group mb-3">
         <label htmlFor="email">Email:</label>
         <input
@@ -77,7 +80,6 @@ export function Login({ setAccount }) {
         onClick={() => {
           if (companyEmail != '' && companyPassword != '') {
             login({ email: companyEmail, password: companyPassword }, companySuccess, 'false');
-            navigate("/Home");
           }
         }}
       >

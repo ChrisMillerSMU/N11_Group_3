@@ -12,6 +12,18 @@ router.post('/', async (req, res, next) => {
     next();
 });
 
+router.delete('/:interestID', async (req, res, next) => {
+    try {
+        const result = await req.models.interest.delInterest(req.params.interestID);
+        res.status(200).json(result);
+    }
+    catch (err) {
+        console.error('Failed to find interest:', err);
+        res.status(500).json({ message: err.toString() });
+    }
+    next();
+});
+
 router.get('/', async (req, res, next) => {
     try {
         const result = await req.models.interest.getInterests();
@@ -24,9 +36,21 @@ router.get('/', async (req, res, next) => {
     next();
 });
 
+router.get('/find', async (req, res, next) => {
+    try {
+        const result = await req.models.interest.findInterests(req.body.athlete, req.body.company);
+        res.status(200).json(result);
+    }
+    catch (err) {
+        console.error('Failed to find interest:', err);
+        res.status(500).json({ message: err.toString() });
+    }
+    next();
+});
+
 router.get('/:interestID', async(req, res, next) => {
     try {
-        const result = await req.models.interest.findInterest(req.params.interestID);
+        const result = await req.models.interest.getInterest(req.params.interestID);
         res.status(200).json(result);
     }
     catch (err) {

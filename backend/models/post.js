@@ -17,8 +17,18 @@ class Post {
         return result;
     }
 
+    async deletePost(postID) {
+        const result = await this.DBQuery("DELETE FROM post WHERE postID = ?", [postID]);
+        return result;
+    }
+
     async findPost(postID) {
         const result = await this.DBQuery("SELECT * FROM post WHERE postID = ?", [postID]);
+        return result;
+    };
+
+    async findPostByEmail(email) {
+        const result = await this.DBQuery("SELECT * FROM post WHERE company = ?", [email]);
         return result;
     };
 

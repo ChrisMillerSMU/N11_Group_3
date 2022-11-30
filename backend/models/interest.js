@@ -12,12 +12,22 @@ class Interest {
         return this.findInterest(result.insertId);
     };
 
+    async delInterest(interestID) {
+        const result = await this.DBQuery("DELETE FROM interest WHERE interestID=?", [interestID]);
+        return result;
+    };
+
     async getInterests() {
         const result = await this.DBQuery("SELECT * FROM interest;");
         return result;
     }
 
-    async findInterest(interestID) {
+    async findInterest(athlete, company) {
+        const result = await this.DBQuery("SELECT * FROM interest WHERE athlete = ? AND company = ?", [athlete, company]);
+        return result;
+    };
+
+    async getInterest(interestID) {
         const result = await this.DBQuery("SELECT * FROM interest WHERE interestID = ?", [interestID]);
         return result;
     };

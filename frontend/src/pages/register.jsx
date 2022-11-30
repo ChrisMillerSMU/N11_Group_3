@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../api/api"
+import { registerAthlete, registerCompany, login } from "../api/api"
 
 export function Register({ setAccount }) {
   const navigate = useNavigate();
@@ -25,8 +25,28 @@ export function Register({ setAccount }) {
   const [confirmCompanyPassword, setConfirmCompanyPassword] = useState("");
   const [companyName, setCompanyName] = useState("");
 
+
+  const athleteSuccess = () => {
+    setAccount({ email: athleteEmail, password: athletePassword, isAthlete: true });
+    navigate('/home');
+  }
+  const companySuccess = () => {
+    setAccount({ email: companyEmail, password: companyPassword, isAthlete: false });
+    navigate('/home');
+  }
+
+  const athleteRegisterSuccess = () => {
+    login({email:athleteEmail, password:athletePassword}, athleteSuccess, 'true');
+  }
+  const companyRegisterSuccess = () => {
+    login({ email: companyEmail, password: companyPassword }, companySuccess, 'false');
+  }
+
   return (
     <div>
+      <button type="button"
+      onClick={() => { navigate('/');
+      }}> Back </button>
       <div className="form-group mb-3">
         <label htmlFor="email">Email:</label>
         <input
@@ -172,10 +192,8 @@ export function Register({ setAccount }) {
       </div>
       <button type="button"
         onClick={() => {
-          console.log(athleteEmail, athletePassword, confirmAthletePassword);
           if (athleteEmail != '' && athletePassword != '' && confirmAthletePassword != '' && athletePassword === confirmAthletePassword) {
-            setAccount({ email: athleteEmail, school: school, name: name, height: height, wingspan: wingspan, gender: gender, sport: sport, year: year, stat: stats, twitter: twitter, instagram: instagram, password: athletePassword });
-            navigate("/home");
+            registerAthlete({ email: athleteEmail, school: school, name: name, height: height, wingspan: wingspan, gender: gender, sport: sport, year: year, stat: stats, twitter: twitter, instagram: instagram, password: athletePassword }, athleteRegisterSuccess);
           }
         }}
       >Athlete Register</button>
@@ -227,8 +245,7 @@ export function Register({ setAccount }) {
         type="button"
         onClick={() => {
           if (companyEmail != '' && companyPassword != '' && confirmCompanyPassword != '' && companyPassword == confirmCompanyPassword) {
-            setAccount({ email: companyEmail, name: companyName, password: companyPassword });
-            navigate("/home");
+            registerCompany({ email: companyEmail, name: companyName, password: companyPassword }, companyRegisterSuccess);
           }
         }}
       >
