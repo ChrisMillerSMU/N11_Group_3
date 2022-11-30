@@ -8,7 +8,7 @@ import { PostDetails } from './pages/postDetails';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import React from 'react';
 
 
