@@ -118,7 +118,6 @@ export const addSubmission = (submission) => new Promise((resolve, reject) => {
 });
 
 export const findSubmission = (postID, success = undefined) => new Promise((resolve, reject) => {
-  console.log(postID);
 axios.get(`${apiEndpoint}/submission/ID/${postID}`, apiConfig)
     .then(x => {
           resolve(x.data)

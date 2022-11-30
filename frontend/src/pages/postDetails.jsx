@@ -5,12 +5,12 @@ import { Submission } from "./submission";
 import { useParams } from "react-router-dom";
 
 export const PostDetails = () => {
-    const postID = useParams().postID;
-    const [submissions, setSubmissions] = useState(undefined);
+  const postID = useParams().postID;
+  const [submissions, setSubmissions] = useState(undefined);
 
   useEffect(() => {
     findSubmission(postID).then((x) => {
-        setSubmissions(x);
+      setSubmissions(x);
     });
   }, []);
 
@@ -32,11 +32,15 @@ export const PostDetails = () => {
           </button>
         </nav>
         <div className="mt-5">
-          {submissions.map((submission) => (
-            <>
-              <Submission submission={ submission }/>
-            </>
-          ))}
+          {submissions.length == 0 ? (
+            <div className="text-black">No Applications!</div>
+          ) : (
+            submissions.map((submission) => (
+              <>
+                <Submission submission={submission} />
+              </>
+            ))
+          )}
         </div>
       </div>
     </>

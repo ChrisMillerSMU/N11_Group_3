@@ -20,7 +20,8 @@ export const Home = ({ account, setAccount }) => {
 
   const navigate = useNavigate();
   if (!posts) {
-      return <>loading...</>;}
+      return <>loading...</>;
+    }
     return (
       <>
         <div className="container">
