@@ -1,9 +1,10 @@
 import { CreatePost } from './pages/createPost.jsx';
-import { Home } from './pages/home.jsx';
+import { Home } from './pages/Home.jsx';
 import { Landing } from './pages/landing.jsx';
 import { Login } from './pages/login.jsx';
 import { Register } from './pages/register.jsx';
 import { Settings } from './pages/settings.jsx';
+import './styles.css';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
