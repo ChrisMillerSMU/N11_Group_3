@@ -11,6 +11,7 @@ export const CreatePost = () => {
 
 
     return <>
+        <header>Create Post</header>
         <ul className="list-group">
             <li className="list-group-item">
                 <div className="row">

@@ -22,7 +22,8 @@ export function Login({ setAccount }) {
 
   return (
     <div>
-      <div className="form-group mb-3">
+      <header className="bg-dark text-white fs-4 font-weight-bold p-2 text-center">Log in</header>
+      <div className="form-group mt-3 mb-3">
         <label htmlFor="email">Email:</label>
         <input
           type="text"
@@ -45,12 +46,13 @@ export function Login({ setAccount }) {
         />
       </div>
       <button type="button"
+        className="btn btn-primary col-2"
         onClick={() => {
           if (athleteEmail != '' && athletePassword != '') {
             login({email:athleteEmail, password:athletePassword}, athleteSuccess, 'true');
           }
         }}>Athlete Log in</button>
-      <div className="form-group mb-3">
+      <div className="form-group mt-3 mb-3">
         <label htmlFor="email">Email:</label>
         <input
           type="text"
@@ -74,6 +76,7 @@ export function Login({ setAccount }) {
       </div>
       <button
         type="button"
+        className="btn btn-primary col-2"
         onClick={() => {
           if (companyEmail != '' && companyPassword != '') {
             login({ email: companyEmail, password: companyPassword }, companySuccess, 'false');
