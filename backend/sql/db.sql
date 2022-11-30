@@ -74,11 +74,6 @@ INSERT INTO athlete VALUES
 ('rasheer@smu.edu', 'SMU', 'Rashee Rice', '6''1"', '5''11"', 'Male', 'Football', 4, '1500 receiving yards in the last season', '@rasheerice', '@rasheerice', 'ponyup'),
 ('alexmorgan@stanford.edu', 'Stanford', 'Alex Morgan', '5''7"', '5''1"', 'Female', 'Soccer', 2, '12 goals scored in the last season', '@alexmorgan', '@alexmorgan', 'soccerrocks');
 
-email varchar(255) DEFAULT '',
-    name varchar(255) DEFAULT '',
-    password varchar(255) DEFAULT '',
-    PRIMARY KEY (email)
-
 INSERT INTO company VALUES 
 ('nike@nike.com', 'Nike', 'swoosh'),
 ('gatorade@gatorade.com', 'Gatorade', 'getfueled'),
