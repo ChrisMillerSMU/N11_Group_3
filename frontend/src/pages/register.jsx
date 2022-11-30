@@ -27,7 +27,24 @@ export function Register({ setAccount }) {
 
   return (
     <div>
-      <header className="bg-dark text-white fs-3 text-center p-2">Register</header>
+      <nav className="navbar navbar-dark bg-dark">
+        <div className="container-fluid">
+          <div className="navbar-brand">Recruiter</div>
+          <div className="bg-dark text-white fs-5 font-weight-bold p-2 text-center">Register</div>
+          <div className="d-grid gap-2 d-md-block">
+            <button
+              type="button"
+              className="btn btn-dark"
+              onClick={() => {
+                setAccount(undefined);
+                navigate("/");
+              }}
+            >
+              Back
+            </button>
+          </div>
+        </div>
+      </nav>
 
       <div className="row mt-3">
         <div className="form-group col-6">

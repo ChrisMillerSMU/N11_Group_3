@@ -22,7 +22,25 @@ export function Login({ setAccount }) {
 
   return (
     <div>
-      <header className="bg-dark text-white fs-4 font-weight-bold p-2 text-center">Log in</header>
+      <nav className="navbar navbar-dark bg-dark">
+        <div className="container-fluid">
+          <div className="navbar-brand">Recruiter</div>
+          <div className="bg-dark text-white fs-5 font-weight-bold p-2 text-center">Log in</div>
+          <div className="d-grid gap-2 d-md-block">
+            <button
+              type="button"
+              className="btn btn-dark"
+              onClick={() => {
+                setAccount(undefined);
+                navigate("/");
+              }}
+            >
+              Back
+            </button>
+          </div>
+        </div>
+      </nav>
+
       <div className="form-group mt-3 mb-3">
         <label htmlFor="email">Email:</label>
         <input
@@ -49,7 +67,7 @@ export function Login({ setAccount }) {
         className="btn btn-primary col-2"
         onClick={() => {
           if (athleteEmail != '' && athletePassword != '') {
-            login({email:athleteEmail, password:athletePassword}, athleteSuccess, 'true');
+            login({ email: athleteEmail, password: athletePassword }, athleteSuccess, 'true');
           }
         }}>Athlete Log in</button>
       <div className="form-group mt-3 mb-3">
