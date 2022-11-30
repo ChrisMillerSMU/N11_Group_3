@@ -17,7 +17,6 @@ CREATE TABLE athlete(
     twitter varchar(255) DEFAULT '',
     instagram varchar(255) DEFAULT '',
     password varchar(255) DEFAULT '',
-
     PRIMARY KEY (email)
 );
 
@@ -32,7 +31,7 @@ CREATE TABLE interest(
     interestID INT NOT NULL AUTO_INCREMENT,
     athlete varchar(255),
     company varchar(255),
-    mutual int DEFAULT,
+    mutual int,
     PRIMARY KEY (interestID),
     FOREIGN KEY (athlete) REFERENCES athlete(email),
     FOREIGN KEY (company) REFERENCES company(email)
@@ -54,7 +53,7 @@ CREATE TABLE submission(
     date_time DATETIME,
     PRIMARY KEY (submissionID),
     FOREIGN KEY (athlete) REFERENCES athlete(email),
-    FOREIGN KEY (post) REFERENCES post(postID)
+    FOREIGN KEY (post) REFERENCES post(postID) ON DELETE CASCADE
 );
 
 
@@ -63,7 +62,7 @@ CREATE TABLE endorsement (
     submission INT,
     date_time DATETIME,
     PRIMARY KEY (endorsementID),
-    FOREIGN KEY (submission) REFERENCES submission(submissionID)
+    FOREIGN KEY (submission) REFERENCES submission(submissionID) ON DELETE CASCADE
 );
 
 SHOW TABLES;

@@ -22,6 +22,11 @@ class Submission {
         return result;
     };
 
+    async findSubmissionByAthlete(postID, athlete) {
+        const result = await this.DBQuery("SELECT * FROM submission WHERE post = ? AND athlete = ?", [postID, athlete]);
+        return result;
+    };
+
     async findSubmission(submissionID) {
         const result = await this.DBQuery("SELECT * FROM submission WHERE submissionID = ?", [submissionID]);
         return result;

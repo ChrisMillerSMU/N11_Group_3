@@ -1,21 +1,27 @@
 import { useState } from "react";
 import { TextField } from '../components/TextField';
 import { TextAreaField } from '../components/textAreaField';
+import { editPost, addPost } from "../api/api";
+import { useNavigate } from "react-router-dom";
 
+export const CreatePost = (account, description) => {
+    const [newJobDescription, setNewJobDescription] = useState("");
 
-export const CreatePost = () => {
+    const navigate = useNavigate(description);
 
-    const [newJobTitle, setNewJobTitle] = useState(undefined);
-    const [newJobDescription, setNewJobDescription] = useState(undefined);
-
-
+    const postSuccess = () => {
+        navigate('/home');
+    }
 
     return <>
+        <header>Create Post</header>
+    <button type="button"
+    onClick={() => { navigate('/home'); }}> Back </button>
         <ul className="list-group">
             <li className="list-group-item">
                 <div className="row">
                     <div className="col-12">
-                        <TextAreaField label="description"
+                        <TextAreaField label="Description of post"
                             value={newJobDescription}
                             setValue={setNewJobDescription} />
                     </div>
@@ -25,9 +31,7 @@ export const CreatePost = () => {
                         <button type="button"
                             className="btn btn-primary"
                             onClick={() => {
-                                //new Post(newJobTitle, newJobDescription));
-                                setNewJobTitle('');
-                                setNewJobDescription('');
+                                    addPost({company:account.account.email, date_time:new Date().toLocaleString(), description:newJobDescription}, postSuccess);
                             }}>
                             Add Post
                         </button>
