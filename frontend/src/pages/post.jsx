@@ -18,10 +18,15 @@ export const Post = ({ account, post }) => {
     }
 
     return <>
-        {state && <div className="card">
+        {state && <div className="card mt-3">
+            <div className="card-header">
                 Company contact: {post.company}
-            <div className="ms-2">{post.description}</div>
+            </div>
+            <div className="card-body">
+                <div className="card-text">{post.description}</div>
+            </div>
             {account.isAthlete && <button type="button"
+                className="btn btn-primary"
                 onClick={() => {
                     findSubmissionByAthlete(post.postID, account.email, getSuccess);
                 }}>{apply}</button>}

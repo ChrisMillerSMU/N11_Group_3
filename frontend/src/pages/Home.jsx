@@ -21,31 +21,41 @@ export const Home = ({ account, setAccount, setPost }) => {
 
   const navigate = useNavigate();
   if (!posts) {
+  if (!account) {
     return <>loading...</>;
   }
   return (
     <>
       <div className="container">
-        <nav>
-          <button
-            type="button"
-            onClick={() => {
-              setAccount(undefined);
-              navigate("/");
-            }}
-          >
-            Log Out
-          </button>
-          {!account.isAthlete && (
+        <nav className="navbar navbar-dark bg-dark">
+        <div className="container-fluid">
+          <div className="navbar-brand">Recruiter</div>
+          <div className="d-grid gap-2 d-md-block">
+              <button
+                type="button"
+              className="btn btn-dark"
+                onClick={() => {
+                  setAccount(undefined);
+                  navigate("/");
+                }}
+              >
+                Log Out
+              </button>
+              {!account.isAthlete && (
             <button
-              type="button"
-              onClick={() => {
-                navigate("/CreatePost");
-              }}
-            >
+                  type="button"
+              className="btn btn-dark"
+                  onClick={() => {
+                    navigate("/CreatePost");
+                  }}
+                >
               Create Post
             </button>
           )}
+          </div>
+
+        </div>
+
         </nav>
         <div className="mt-5">
           {posts.map((post) => (

@@ -14,6 +14,7 @@ export const CreatePost = (account, description) => {
     }
 
     return <>
+        <header>Create Post</header>
     <button type="button"
     onClick={() => { navigate('/home'); }}> Back </button>
         <ul className="list-group">
