@@ -31,7 +31,7 @@ CREATE TABLE interest(
     interestID INT NOT NULL AUTO_INCREMENT,
     athlete varchar(255),
     company varchar(255),
-    mutual int,
+    mutual int DEFAULT 0,
     PRIMARY KEY (interestID),
     FOREIGN KEY (athlete) REFERENCES athlete(email),
     FOREIGN KEY (company) REFERENCES company(email)
