@@ -9,9 +9,21 @@ class Athlete {
         this.disconnect();
     }
 
+    async authenticate(email, password) {
+        const users = await this.findAthlete(email);
+        if (users.length === 0) {
+            console.error(`No athlete matched the email ${email}`);
+            return false;
+        }
+        const user = users[0];
+        const validPassword = await bcrypt.compare(password, user.password);
+        return validPassword;
+    };
+
     async addAthlete(body) {
         const email = body.email;
-        const result = await this.DBQuery("INSERT INTO athlete (email) VALUES (?)", [email]);
+        const hashedPassword = bcrypt.hashSync(body.password, 10);
+        const result = await this.DBQuery("INSERT INTO athlete (email, password) VALUES (?, ?)", [email, hashedPassword]);
         return this.updateAthlete(email, body);
     };
 
@@ -71,7 +83,8 @@ class Athlete {
             await this.DBQuery("UPDATE athlete SET twitter = ? WHERE email = ?", [body.twitter, email]);
         }
         if (body.password !== undefined) {
-            await this.DBQuery("UPDATE athlete SET password = ? WHERE email = ?", [body.password, email]);
+            const hashedPassword = bcrypt.hashSync(body.password, 10);
+            await this.DBQuery("UPDATE athlete SET password = ? WHERE email = ?", [hashedPassword, email]);
         }
         return this.findAthlete(email);
     }

@@ -14,6 +14,7 @@ app.use('/endorsement', require('./routes/endorsement'));
 app.use('/interest', require('./routes/interest'));
 app.use('/post', require('./routes/post'));
 app.use('/submission', require('./routes/submission'));
+app.use('/session', require('./routes/session'));
 
 const port = 3001;
 
