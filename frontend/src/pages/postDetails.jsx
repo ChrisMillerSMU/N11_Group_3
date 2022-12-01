@@ -4,7 +4,7 @@ import { findSubmission } from "../api/api";
 import { Submission } from "./submission";
 import { useParams } from "react-router-dom";
 
-export const PostDetails = () => {
+export const PostDetails = ({ account }) => {
   const postID = useParams().postID;
   const [submissions, setSubmissions] = useState(undefined);
 
@@ -46,7 +46,7 @@ export const PostDetails = () => {
           ) : (
             submissions.map((submission) => (
               <>
-                <Submission submission={submission} />
+                <Submission submission={submission} account={account} />
               </>
             ))
           )}

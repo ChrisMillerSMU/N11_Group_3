@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
-import { delPost, findSubmissionByAthlete, addSubmission } from "../api/api";
+import { delPost, findSubmissionByAthlete, addSubmission, addInterest } from "../api/api";
 
 export const Post = ({ account, post }) => {
     const navigate = useNavigate();
@@ -14,6 +14,7 @@ export const Post = ({ account, post }) => {
         else{
             setApply("Application successful!");
             addSubmission({post:post.postID, athlete:account.email});
+            addInterest({athlete:account.email, company:post.company, mutual:0});
         }
     }
 

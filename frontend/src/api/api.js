@@ -90,22 +90,31 @@ export const delPost = (postID) => new Promise((resolve, reject) => {
       });
 });
 
-export const addInterest = (interest) => new Promise((resolve, reject) => {
-    axios.post(`${apiEndpoint}/interst`, interest, apiConfig)
+export const delSubmission = (submissionID) => new Promise((resolve, reject) => {
+  axios.delete(`${apiEndpoint}/submission/${submissionID}`, apiConfig)
+      .then(x =>resolve(x.data))
+      .catch(x => {
+        alert(x);
+        reject(x);
+      });
+});
+
+export const updateInterest = (interest) => new Promise((resolve, reject) => {
+  axios.put(`${apiEndpoint}/interest/${interest.interestID}`, interest, apiConfig)
+      .then(x =>resolve(x.data))
+      .catch(x => {
+        alert(x);
+        reject(x);
+      });
+});
+
+export const addInterest = (body) => new Promise((resolve, reject) => {
+    axios.post(`${apiEndpoint}/interest`, body, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
             reject(x);
         });
-});
-
-export const findInterest = (body) => new Promise((resolve, reject) => {
-  axios.post(`${apiEndpoint}/interst/find`, body, apiConfig)
-      .then(x => resolve(x.data))
-      .catch(x => {
-          alert(x);
-          reject(x);
-      });
 });
 
 export const addSubmission = (submission) => new Promise((resolve, reject) => {
@@ -121,18 +130,23 @@ export const findSubmission = (postID, success = undefined) => new Promise((reso
 axios.get(`${apiEndpoint}/submission/ID/${postID}`, apiConfig)
     .then(x => {
           resolve(x.data)
-          // if(x.data.length > 0){
-          //   success(true);
-          // }
-          // else{
-          //   success(false);
-          // }
         })
     .catch(x => {
       alert(x);
       reject(x);
     });
 });
+
+export const findInterest = (athlete, company) => new Promise((resolve, reject) => {
+  axios.get(`${apiEndpoint}/interest/athlete/${athlete}/company/${company}`, apiConfig)
+      .then(x => {
+            resolve(x.data)
+          })
+      .catch(x => {
+        alert(x);
+        reject(x);
+      });
+  });
 
 export const findSubmissionByAthlete = (postID, athlete, success = undefined) => new Promise((resolve, reject) => {
   axios.get(`${apiEndpoint}/submission/athlete/${postID}/${athlete}`, apiConfig)

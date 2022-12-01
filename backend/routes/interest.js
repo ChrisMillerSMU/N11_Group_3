@@ -36,9 +36,9 @@ router.get('/', async (req, res, next) => {
     next();
 });
 
-router.get('/find', async (req, res, next) => {
+router.get('/athlete/:athlete/company/:company', async (req, res, next) => {
     try {
-        const result = await req.models.interest.findInterests(req.body.athlete, req.body.company);
+        const result = await req.models.interest.findInterest(req.params.athlete, req.params.company);
         res.status(200).json(result);
     }
     catch (err) {

@@ -1,5 +1,5 @@
 import { CreatePost } from './pages/createPost.jsx';
-import { Home } from './pages/Home.jsx';
+import { Home } from './pages/home.jsx';
 import { Landing } from './pages/landing.jsx';
 import { Login } from './pages/login.jsx';
 import { Register } from './pages/register.jsx';
@@ -28,7 +28,7 @@ export const App = () => {
               <Route path="/createPost" element={<CreatePost account={account}/>} ></Route>
               <Route path="/register" element={<Register setAccount={setAccount} />} ></Route>
               <Route path="/settings" element={<Settings account={account} setAccount={setAccount}/>} ></Route>
-              <Route path="/postDetails/:postID" element={<PostDetails/>} ></Route>
+              <Route path="/postDetails/:postID" element={<PostDetails account={account}/>} ></Route>
             </Routes>
           </Router>
         </div>
