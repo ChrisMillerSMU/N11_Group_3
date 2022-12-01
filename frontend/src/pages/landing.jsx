@@ -20,6 +20,7 @@ export const Landing = () => {
               <button type="button"
                 onClick={() => {
                   navigate('/Login');
+                  
                 }}>Log in</button>
               <button type="button"
                 onClick={() => {
