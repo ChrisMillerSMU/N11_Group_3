@@ -3,6 +3,7 @@ import { Post } from "./post";
 import { useNavigate } from "react-router-dom";
 import { getPosts, getCompanyPosts } from "../api/api";
 
+
 export const Home = ({ account, setAccount }) => {
   const [posts, setPosts] = useState(undefined);
 
