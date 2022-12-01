@@ -31,13 +31,13 @@ export const Landing = () => {
 
       
         <section className="opening">
-          <div className="crop">
+          <div className="crop landing-container">
             <img src="https://static01.nyt.com/images/2021/10/23/business/23DB-NOCERA/23DB-NOCERA-superJumbo.jpg?quality=75&auto=webp"></img>
+            <h2 className="landing-title">Endorsing made easy</h2>
+            <p className="landing-subtitle">
+              Recruiter matches student athletes with companies looking to partner and sponsor
+            </p>
           </div>
-          <h2 className="landing-title">Endorsing made easy</h2>
-          <p className="landing-subtitle">
-            Recruiter matches student athletes with companies looking to partner and sponsor
-          </p>
         </section>
       
 

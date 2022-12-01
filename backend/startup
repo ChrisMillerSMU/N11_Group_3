@@ -7,4 +7,5 @@ mysql --user=root --password=Sped6854
 ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'Sped6854';
 flush privileges;
 
+
 node index.js
