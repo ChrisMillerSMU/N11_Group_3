@@ -14,10 +14,26 @@ export const CreatePost = (account, description) => {
     }
 
     return <>
-        <header>Create Post</header>
-    <button type="button"
-    onClick={() => { navigate('/home'); }}> Back </button>
-        <ul className="list-group">
+    <nav className="navbar navbar-dark bg-dark">
+          <div className="container-fluid">
+            <div className="navbar-brand">Recruiter</div>
+            <div className="bg-dark text-white fs-5 font-weight-bold p-2 text-center">
+              Create Post
+            </div>
+            <div className="d-grid gap-2 d-md-block">
+              <button
+                type="button"
+                className="btn btn-dark"
+                onClick={() => {
+                  navigate("/home");
+                }}
+              >Back
+              </button>
+            </div>
+          </div>
+        </nav>
+    
+        <ul className="list-group mt-5">
             <li className="list-group-item">
                 <div className="row">
                     <div className="col-12">

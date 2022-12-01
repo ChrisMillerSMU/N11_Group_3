@@ -20,47 +20,50 @@ export const Home = ({ account, setAccount }) => {
 
   const navigate = useNavigate();
   if (!posts) {
-      return <>loading...</>;
-    }
-    return (
-      <>
-        <div className="container">
-          <nav className="navbar navbar-dark bg-dark">
-            <div className="container-fluid">
-              <div className="navbar-brand">Recruiter</div>
-              <div className="d-grid gap-2 d-md-block">
+    return <>loading...</>;
+  }
+  return (
+    <>
+      <div className="container">
+        <nav className="navbar navbar-dark bg-dark">
+          <div className="container-fluid">
+            <div className="navbar-brand">Recruiter</div>
+            <div className="bg-dark text-white fs-5 font-weight-bold p-2 text-center">
+              Home
+            </div>
+            <div className="d-grid gap-2 d-md-block">
+              <button
+                type="button"
+                className="btn btn-dark"
+                onClick={() => {
+                  setAccount(undefined);
+                  navigate("/");
+                }}
+              >
+                Log Out
+              </button>
+              {!account.isAthlete && (
                 <button
                   type="button"
                   className="btn btn-dark"
                   onClick={() => {
-                    setAccount(undefined);
-                    navigate("/");
+                    navigate("/CreatePost");
                   }}
                 >
-                  Log Out
+                  Create Post
                 </button>
-                {!account.isAthlete && (
-                  <button
-                    type="button"
-                    className="btn btn-dark"
-                    onClick={() => {
-                      navigate("/CreatePost");
-                    }}
-                  >
-                    Create Post
-                  </button>
-                )}
-              </div>
+              )}
             </div>
-          </nav>
-          <div className="mt-5">
-            {posts.map((post) => (
-              <>
-                <Post account={account} post={post} />
-              </>
-            ))}
           </div>
+        </nav>
+        <div className="mt-5">
+          {posts.map((post) => (
+            <>
+              <Post account={account} post={post} />
+            </>
+          ))}
         </div>
-      </>
-    );
+      </div>
+    </>
+  );
 };

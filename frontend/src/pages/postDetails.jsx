@@ -21,15 +21,24 @@ export const PostDetails = () => {
   return (
     <>
       <div className="container">
-        <nav>
-          <button
-            type="button"
-            onClick={() => {
-              navigate("/home");
-            }}
-          >
-            Back
-          </button>
+      <nav className="navbar navbar-dark bg-dark">
+          <div className="container-fluid">
+            <div className="navbar-brand">Recruiter</div>
+            <div className="bg-dark text-white fs-5 font-weight-bold p-2 text-center">
+              Applications
+            </div>
+            <div className="d-grid gap-2 d-md-block">
+              <button
+                type="button"
+                className="btn btn-dark"
+                onClick={() => {
+                  navigate("/home");
+                }}
+              >
+                Back
+              </button>
+            </div>
+          </div>
         </nav>
         <div className="mt-5">
           {submissions.length == 0 ? (
